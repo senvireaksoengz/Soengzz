@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Allows scrolling if button gets huge */
+            background-color: #fce4ec; /* Light pink */
+            margin: 0;
+            padding: 20px; /* Padding for mobile edges */
+            box-sizing: border-box;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 600px; /* Keeps it neat on desktop */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 2rem; /* Slightly smaller for mobile start */
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        /* Responsive Image */
+        img {
+            max-width: 80%; /* Fits screen width */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap; /* Allows buttons to stack if needed */
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 12px 24px; /* Larger touch target for phones */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap; /* Keeps text on one line */
+        }
+
+        #yesBtn {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+            z-index: 10; /* Ensures Yes button stays on top */
+        }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Success Message styling */
+        #success-message {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        #success-message h1 {
+            font-size: 2.5rem;
+            margin-top: 20px;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            img {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-container">
+        <img id="main-img" src="https://media.tenor.com/1cL3xuRnodMAAAAi/milk-and-mocha-bear-kiss.gif" alt="Cute bear asking">
+        
+        <h1>Can We Sak Merl jit knea &#x1F97A;❤️ ?</h1>
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="acceptLove()">Yes</button>
+            <button id="noBtn" onclick="rejectLove()">No</button>
+        </div>
+    </div>
+
+    <div class="container" id="success-message">
+        <img src="https://media.tenor.com/KGnViErYaD8AAAAj/abra%C3%A7ourso.gif" alt="Bears kissing">
+        <h1>Knew you would say yes! &#x1F97A;❤️</h1>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const mainImg = document.getElementById('main-img');
+        
+        const messages = [
+            "Are you sure?",
+            "Really sure??",
+            "Are you positive?",
+            "Pookie please...",
+            "Just think about it!",
+            "If you say no, I will be really sad...",
+            "I will be very sad...",
+            "I will be very very sad...",
+            "Ok fine, I will stop asking...",
+            "Just kidding, say yes please! ❤️"
+        ];
+
+        let messageIndex = 0;
+        let fontSize = 1.2;
+
+        function rejectLove() {
+            // Change text of No button
+            noBtn.innerText = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+
+            // Make Yes button grow
+            fontSize += 0.5; 
+            yesBtn.style.fontSize = `${fontSize}rem`;
+            
+            // Adjust padding relative to font size to keep shape
+            yesBtn.style.padding = `${fontSize * 0.5}em ${fontSize * 1}em`;
+        }
+
+        function acceptLove() {
+            document.getElementById('main-container').style.display = 'none';
+            document.getElementById('success-message').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
